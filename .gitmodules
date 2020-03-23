@@ -1,0 +1,5 @@
+[submodule "search-engine"]
+	path = search-engine
+	url = https://github.com/orion-search/search-engine
+	branch = docker-image
+	shallow = true

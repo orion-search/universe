@@ -1,13 +1,32 @@
-version: '3'
+version: "3"
 services:
   search:
     image: orionsearch/search-engine:0.0.1
     container_name: search
     ports:
-      - '6666:5000'
+      - "6666:5000"
+    environment:
+      MODEL_FAISS: ${SEARCH_ENGINE_MODEL_FAISS}
+      MODEL_SVD: ${SEARCH_ENGINE_MODEL_SVD}
+      MODEL_TFIDF: ${SEARCH_ENGINE_MODEL_TFIDF}
     restart: always
-  # airflow:
-  #   container_name: airflow
+  airflow:
+    container_name: airflow
+    build:
+      context: ./orion
+      dockerfile: Dockerfile
+      args:
+        DB_HOST: ${DB_HOST}
+        DB_PORT: ${DB_PORT}
+        DB_NAME: ${DB_NAME}
+        DB_USER: ${DB_USER}
+        DB_PASS: ${DB_PASS}
+    env_file:
+      - orion/.env
+      - .env
+    ports:
+      - "8080:8080"
+    restart: always
   # frontend:
   #   container_name: frontend
   #   restart: always

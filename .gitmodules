@@ -3,3 +3,8 @@
 	url = https://github.com/orion-search/search-engine
 	branch = docker-image
 	shallow = true
+[submodule "orion"]
+	path = orion
+	url = https://github.com/orion-search/orion
+	branch = dev
+	shallow = true

@@ -1,15 +1,19 @@
 version: "3"
 services:
   search:
-    image: orionsearch/search-engine:0.0.1
+    build:
+      context: ./search-engine
+      dockerfile: Dockerfile
     container_name: search
-    ports:
-      - "6666:5000"
+    labels:
+      description: Flask endpoints for document search
     environment:
       MODEL_FAISS: ${SEARCH_ENGINE_MODEL_FAISS}
       MODEL_SVD: ${SEARCH_ENGINE_MODEL_SVD}
       MODEL_TFIDF: ${SEARCH_ENGINE_MODEL_TFIDF}
     restart: always
+    expose:
+      - "5000"
   airflow:
     container_name: airflow
     build:
@@ -25,50 +29,46 @@ services:
       - orion/.env
       - .env
     ports:
-      - "8080:8080"
+      - "8081:8080"
     restart: always
+  graphql:
+    image: hasura/graphql-engine:v1.0.0
+    container_name: graphql
+    labels:
+      description: Our GraphQL interface to our PostgreSQL database
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_ADMIN_SECRET}
+      HASURA_GRAPHQL_ENABLE_CONSOLE: ${HASURA_GUI}
+      # HASURA_GRAPHQL_ACCESS_KEY: ${HASURA_SECRET_KEY}
+      # HASURA_GRAPHQL_JWT_SECRET: '{"type":"HS256", "key":"${JWT_SECRET_KEY}"}'
+    command:
+      - graphql-engine
+      - serve
+      - --enable-console
+      - --unauthorized-role=anonymous
+    restart: always
+    expose:
+      - "8080"
+  caddy:
+    image: abiosoft/caddy:1.0.3
+    container_name: caddy
+    depends_on:
+      - search
+      - graphql
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      ACME_AGREE: "true"
+      CADDYPATH: /etc/caddycerts
+    volumes:
+      - ./backend/Caddyfile:/etc/Caddyfile
+      # Caching ACME challenge solutions so we don't hit LetsEncrypt's rate limits
+      - ./backend/certs/.caddy:/etc/caddycerts
   # frontend:
   #   container_name: frontend
   #   restart: always
   #   depends_on: graphql
-  #   environment: REACT_APP_HASURA_GRAPHQL_URL=localhost:${HASURA_HOST}/v1/graphql
-  # caddy:
-  #   image: abiosoft/caddy:0.11.0
-  #   container_name: caddy
-  #   depends_on:
-  #     - graphql
-  #   restart: always
-  #   ports:
-  #     - '80:80'
-  #     - '443:443'
-  #   volumes:
-  #     - ./Caddyfile:/etc/Caddyfile
-  #     - caddy_certs:/root/.caddy
-  # graphql:
-  #   image: hasura/graphql-engine:v1.0.0-alpha45
-  #   container_name: graphql
-  #   restart: always
-  #   depends_on:
-  #     - postgres
-  #   networks:
-  #     - artemis
-  #   expose:
-  #     - ${HASURA_PORT}
-  #   environment:
-  #     HASURA_GRAPHQL_DATABASE_URL: postgres://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}
-  #     HASURA_GRAPHQL_ACCESS_KEY: ${HASURA_SECRET_KEY}
-  #     HASURA_GRAPHQL_ENABLE_CONSOLE: ${HASURA_GUI}
-  #     HASURA_GRAPHQL_JWT_SECRET: '{"type":"HS256", "key":"${JWT_SECRET_KEY}"}'
-  #   command:
-  #     - graphql-engine
-  #     - serve
-  # postgres:
-  #   image: postgres:12.2
-  #   container_name: postgres
-  #   restart: always
-  #   expose:
-  #     - ${DB_PORT}
-  #   environment:
-  #     POSTGRES_DB: ${DB_NAME}
-  #     POSTGRES_USER: ${DB_USER}
-  #     POSTGRES_PASSWORD: ${DB_PASS}
+  #   environment: REACT_APP_HASURA_GRAPHQL_URL=localhost:${HASURA_HOST}/v1/

@@ -1,0 +1,17 @@
+api.orion-search.org {
+  gzip
+  errors errors.log
+  log {
+    rotate_size 16
+    rotate_age  14
+    rotate_keep 1
+  }
+  proxy / graphql:8080 {
+    websocket
+  }
+
+  proxy /search search:5000 {
+    without /search
+    transparent
+  }
+}

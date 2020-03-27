@@ -1,0 +1,52 @@
+version: "3"
+services:
+  search:
+    build:
+      context: ./search-engine
+      dockerfile: Dockerfile
+    container_name: search
+    labels:
+      description: Flask endpoints for document search
+    environment:
+      MODEL_FAISS: ${SEARCH_ENGINE_MODEL_FAISS}
+      MODEL_SVD: ${SEARCH_ENGINE_MODEL_SVD}
+      MODEL_TFIDF: ${SEARCH_ENGINE_MODEL_TFIDF}
+    restart: always
+    expose:
+      - "5000"
+  graphql:
+    image: hasura/graphql-engine:v1.0.0
+    container_name: graphql
+    labels:
+      description: Our GraphQL interface to our PostgreSQL database
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_ADMIN_SECRET}
+      HASURA_GRAPHQL_ENABLE_CONSOLE: ${HASURA_GUI}
+      # HASURA_GRAPHQL_ACCESS_KEY: ${HASURA_SECRET_KEY}
+      # HASURA_GRAPHQL_JWT_SECRET: '{"type":"HS256", "key":"${JWT_SECRET_KEY}"}'
+    command:
+      - graphql-engine
+      - serve
+      - --enable-console
+      - --unauthorized-role=anonymous
+    restart: always
+    expose:
+      - "8080"
+  caddy:
+    image: abiosoft/caddy:1.0.3
+    container_name: caddy
+    depends_on:
+      - search
+      - graphql
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      ACME_AGREE: "true"
+      CADDYPATH: /etc/caddycerts
+    volumes:
+      - ./backend/Caddyfile:/etc/Caddyfile
+      # Caching ACME challenge solutions so we don't hit LetsEncrypt's rate limits
+      - ./backend/certs/.caddy:/etc/caddycerts

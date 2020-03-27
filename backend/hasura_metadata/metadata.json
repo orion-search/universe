@@ -1,0 +1,1551 @@
+{
+  "functions": [],
+  "remote_schemas": [],
+  "query_collections": [],
+  "allowlist": [],
+  "version": 2,
+  "tables": [
+    {
+      "table": "author_gender",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [
+        {
+          "using": { "foreign_key_constraint_on": "id" },
+          "name": "mag_author",
+          "comment": null
+        }
+      ],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "computed_fields": [],
+            "columns": [
+              "id",
+              "full_name",
+              "first_name",
+              "gender",
+              "samples",
+              "probability"
+            ],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "country_collaboration",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "country_similarity",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [
+        {
+          "using": { "foreign_key_constraint_on": "field_of_study_id" },
+          "name": "mag_fields_of_study",
+          "comment": null
+        }
+      ],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "doc_vectors",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [
+        {
+          "using": { "foreign_key_constraint_on": "id" },
+          "name": "mag_paper",
+          "comment": null
+        }
+      ],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "computed_fields": [],
+            "columns": ["id", "doi", "vector_2d", "vector_3d"],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "gender_diversity_country",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [
+        {
+          "using": { "foreign_key_constraint_on": "field_of_study_id" },
+          "name": "mag_fields_of_study",
+          "comment": null
+        }
+      ],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "geocoded_places",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [
+        {
+          "using": { "foreign_key_constraint_on": "affiliation_id" },
+          "name": "mag_affiliation",
+          "comment": null
+        }
+      ],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "computed_fields": [],
+            "columns": [
+              "id",
+              "affiliation_id",
+              "lat",
+              "lng",
+              "address",
+              "name",
+              "types",
+              "website",
+              "postal_town",
+              "administrative_area_level_2",
+              "administrative_area_level_1",
+              "country"
+            ],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "latent_space",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "computed_fields": [],
+            "columns": ["country", "topic", "paper_id", "vector_3d"],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "mag_affiliation",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [],
+      "array_relationships": [
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "affiliation_id",
+              "table": "geocoded_places"
+            }
+          },
+          "name": "geocoded_places",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "affiliation_id",
+              "table": "mag_author_affiliation"
+            }
+          },
+          "name": "mag_author_affiliations",
+          "comment": null
+        }
+      ],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "computed_fields": [],
+            "columns": ["id", "affiliation"],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "mag_author_affiliation",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [
+        {
+          "using": { "foreign_key_constraint_on": "affiliation_id" },
+          "name": "mag_affiliation",
+          "comment": null
+        },
+        {
+          "using": { "foreign_key_constraint_on": "author_id" },
+          "name": "mag_author",
+          "comment": null
+        },
+        {
+          "using": { "foreign_key_constraint_on": "paper_id" },
+          "name": "mag_paper",
+          "comment": null
+        }
+      ],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "computed_fields": [],
+            "columns": ["affiliation_id", "author_id"],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "mag_authors",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [],
+      "array_relationships": [
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "id",
+              "table": "author_gender"
+            }
+          },
+          "name": "author_genders",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "author_id",
+              "table": "mag_author_affiliation"
+            }
+          },
+          "name": "mag_author_affiliations",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "author_id",
+              "table": "mag_paper_authors"
+            }
+          },
+          "name": "mag_paper_authors",
+          "comment": null
+        }
+      ],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "computed_fields": [],
+            "columns": ["id", "name"],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "mag_field_of_study_hierarchy",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [
+        {
+          "using": { "foreign_key_constraint_on": "id" },
+          "name": "mag_fields_of_study",
+          "comment": null
+        }
+      ],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "computed_fields": [],
+            "columns": ["id", "parent_id", "child_id"],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "mag_field_of_study_metadata",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [
+        {
+          "using": { "foreign_key_constraint_on": "id" },
+          "name": "mag_fields_of_study",
+          "comment": null
+        }
+      ],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "computed_fields": [],
+            "columns": ["id", "level", "frequency"],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "mag_fields_of_study",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [],
+      "array_relationships": [
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "field_of_study_id",
+              "table": "country_similarity"
+            }
+          },
+          "name": "country_similarities",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "field_of_study_id",
+              "table": "gender_diversity_country"
+            }
+          },
+          "name": "gender_diversity_countries",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "id",
+              "table": "mag_field_of_study_hierarchy"
+            }
+          },
+          "name": "mag_field_of_study_hierarchies",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "id",
+              "table": "mag_field_of_study_metadata"
+            }
+          },
+          "name": "mag_field_of_study_metadata",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "field_of_study_id",
+              "table": "mag_filtered_field_of_study"
+            }
+          },
+          "name": "mag_filtered_field_of_studies",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "field_of_study_id",
+              "table": "mag_paper_fields_of_study"
+            }
+          },
+          "name": "mag_paper_fields_of_studies",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "field_of_study_id",
+              "table": "rca_affiliation"
+            }
+          },
+          "name": "rca_affiliations",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "field_of_study_id",
+              "table": "rca_country"
+            }
+          },
+          "name": "rca_countries",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "field_of_study_id",
+              "table": "research_diversity_country"
+            }
+          },
+          "name": "research_diversity_countries",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "field_of_study_id",
+              "table": "viz_metrics_by_country"
+            }
+          },
+          "name": "viz_metrics_by_countries",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "field_of_study_id",
+              "table": "viz_output_by_research_area_country"
+            }
+          },
+          "name": "viz_output_by_research_area_countries",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "field_of_study_id",
+              "table": "viz_paper_topics"
+            }
+          },
+          "name": "viz_paper_topics",
+          "comment": null
+        }
+      ],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "computed_fields": [],
+            "columns": ["id", "name"],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "mag_filtered_field_of_study",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [
+        {
+          "using": { "foreign_key_constraint_on": "field_of_study_id" },
+          "name": "mag_fields_of_study",
+          "comment": null
+        }
+      ],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "mag_paper_authors",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [
+        {
+          "using": { "foreign_key_constraint_on": "author_id" },
+          "name": "mag_author",
+          "comment": null
+        },
+        {
+          "using": { "foreign_key_constraint_on": "paper_id" },
+          "name": "mag_paper",
+          "comment": null
+        }
+      ],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "computed_fields": [],
+            "columns": ["paper_id", "author_id", "order"],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "mag_paper_conferences",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [
+        {
+          "using": { "foreign_key_constraint_on": "paper_id" },
+          "name": "mag_paper",
+          "comment": null
+        }
+      ],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "computed_fields": [],
+            "columns": ["id", "conference_name", "paper_id"],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "mag_paper_fields_of_study",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [
+        {
+          "using": { "foreign_key_constraint_on": "field_of_study_id" },
+          "name": "mag_fields_of_study",
+          "comment": null
+        },
+        {
+          "using": { "foreign_key_constraint_on": "paper_id" },
+          "name": "mag_paper",
+          "comment": null
+        }
+      ],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "computed_fields": [],
+            "columns": ["paper_id", "field_of_study_id"],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "mag_paper_journal",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [
+        {
+          "using": { "foreign_key_constraint_on": "paper_id" },
+          "name": "mag_paper",
+          "comment": null
+        }
+      ],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "computed_fields": [],
+            "columns": ["id", "journal_name", "paper_id"],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "mag_papers",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [],
+      "array_relationships": [
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "id",
+              "table": "doc_vectors"
+            }
+          },
+          "name": "doc_vectors",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "paper_id",
+              "table": "mag_author_affiliation"
+            }
+          },
+          "name": "mag_author_affiliations",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "paper_id",
+              "table": "mag_paper_authors"
+            }
+          },
+          "name": "mag_paper_authors",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "paper_id",
+              "table": "mag_paper_conferences"
+            }
+          },
+          "name": "mag_paper_conferences",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "paper_id",
+              "table": "mag_paper_fields_of_study"
+            }
+          },
+          "name": "mag_paper_fields_of_studies",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "paper_id",
+              "table": "mag_paper_journal"
+            }
+          },
+          "name": "mag_paper_journals",
+          "comment": null
+        }
+      ],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "computed_fields": [],
+            "columns": [
+              "id",
+              "prob",
+              "title",
+              "publication_type",
+              "year",
+              "date",
+              "citations",
+              "references",
+              "doi",
+              "publisher",
+              "bibtex_doc_type",
+              "inverted_abstract"
+            ],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "output_topic_country",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "computed_fields": [],
+            "columns": [
+              "country",
+              "year",
+              "name",
+              "total_citations",
+              "total_papers"
+            ],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "paper_country",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "computed_fields": [],
+            "columns": ["country", "count", "ids"],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "paper_topics",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "computed_fields": [],
+            "columns": ["id", "name", "level", "frequency", "paper_ids"],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "rca_affiliation",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [
+        {
+          "using": { "foreign_key_constraint_on": "field_of_study_id" },
+          "name": "mag_fields_of_study",
+          "comment": null
+        }
+      ],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "computed_fields": [],
+            "columns": ["id", "rca_sum", "year", "entity", "field_of_study_id"],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "rca_country",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [
+        {
+          "using": { "foreign_key_constraint_on": "field_of_study_id" },
+          "name": "mag_fields_of_study",
+          "comment": null
+        }
+      ],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "computed_fields": [],
+            "columns": ["id", "rca_sum", "year", "entity", "field_of_study_id"],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "research_diversity_country",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [
+        {
+          "using": { "foreign_key_constraint_on": "field_of_study_id" },
+          "name": "mag_fields_of_study",
+          "comment": null
+        }
+      ],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "view_diversity_by_country",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "computed_fields": [],
+            "columns": [
+              "shannon_diversity",
+              "year",
+              "country",
+              "female_share",
+              "field_of_study_id",
+              "topic"
+            ],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "view_institutes",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "computed_fields": [],
+            "columns": [
+              "id",
+              "name",
+              "country",
+              "administrative_area_level_1",
+              "administrative_area_level_2",
+              "lat",
+              "lng",
+              "types",
+              "website"
+            ],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "view_paper_topics",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "computed_fields": [],
+            "columns": ["id", "name", "level", "frequency", "paper_ids"],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "view_top_topics",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "computed_fields": [],
+            "columns": ["topic"],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "viz_metrics_by_country",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [
+        {
+          "using": { "foreign_key_constraint_on": "field_of_study_id" },
+          "name": "mag_fields_of_study",
+          "comment": null
+        }
+      ],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "computed_fields": [],
+            "columns": [
+              "id",
+              "year",
+              "country",
+              "shannon_diversity",
+              "field_of_study_id",
+              "rca_sum",
+              "female_share",
+              "name"
+            ],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "viz_output_by_research_area_country",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [
+        {
+          "using": { "foreign_key_constraint_on": "field_of_study_id" },
+          "name": "mag_fields_of_study",
+          "comment": null
+        }
+      ],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "computed_fields": [],
+            "columns": [
+              "id",
+              "country",
+              "field_of_study_id",
+              "year",
+              "paper_count",
+              "total_citations",
+              "name"
+            ],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "viz_paper_country",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "computed_fields": [],
+            "columns": ["country", "count", "paper_ids"],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "viz_paper_topics",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [
+        {
+          "using": { "foreign_key_constraint_on": "field_of_study_id" },
+          "name": "mag_fields_of_study",
+          "comment": null
+        }
+      ],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "computed_fields": [],
+            "columns": ["field_of_study_id", "name", "count", "paper_ids"],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    },
+    {
+      "table": "viz_paper_year",
+      "is_enum": false,
+      "configuration": {
+        "custom_root_fields": {
+          "select": null,
+          "select_by_pk": null,
+          "select_aggregate": null,
+          "insert": null,
+          "update": null,
+          "delete": null
+        },
+        "custom_column_names": {}
+      },
+      "object_relationships": [],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "computed_fields": [],
+            "columns": ["year", "count", "paper_ids"],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": [],
+      "computed_fields": []
+    }
+  ]
+}

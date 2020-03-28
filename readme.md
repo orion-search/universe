@@ -21,7 +21,20 @@ git clone --recursive https://github.com/orion-search/universe
 
 ### Obtaining API keys
 
-@todo
+#### Microsoft Academic Knowledge ####
+- Sign up for an account with [Microsoft Research](https://msr-apis.portal.azure-api.net/signup).
+- Activate your account and subscribe to the **Project Academic Knowledge**.
+- You can use the **Primary Key** in your profile page to query the API. Test queries using the _Evaluate_ method in the [API Explorer](https://msr-apis.portal.azure-api.net/docs/services/academic-search-api/).
+
+#### Google Places ####
+- Sign in with your Google account to [Google Cloud Platform (GCP)](https://console.cloud.google.com/). 
+- Set up a project and enable billing.
+- Find the **Places API** in the **Marketplace** and enable it.
+- Click on the **CREDENTIALS** tab and generate an API key.
+
+#### GenderAPI ####
+- Sign up on [Gender API](https://gender-api.com/en/).
+- Navigate to the _Authorization tokens_ page and create a new key. 
 
 Don't forget to configure `orion/boto.cfg` with your AWS credentials.
 
@@ -37,7 +50,16 @@ To start off with limited functionality, copy `.env.example` onto `.env` and mak
 
 ### Building and running locally
 
-`docker-compose -f docker-compose.yaml build` and `docker-compose -f docker-compose.yaml up` to run the containers locally.
+Before building the container, configure Orion with `orion/model_config.yaml`. We currently use Orion to collect all of the **bioRxiv** but you can fetch a different subset of the Microsoft Academic Graph. For example, you can configure Orion to collect all of the papers with `habitat destruction` as a Field of Study:
+
+``` yaml
+data:
+    mag:
+        query_values: ['habitat destruction']
+        entity_name: 'F.FN'
+```
+
+Then, do `docker-compose -f docker-compose.yaml build` and `docker-compose -f docker-compose.yaml up` to run the containers locally.
 
 This exposes the below services in respective ports (unless otherwise configured):
 

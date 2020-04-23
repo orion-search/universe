@@ -9,8 +9,7 @@ A monorepo utilizing Git submodules. This facilitates selective or holistic loca
 If you've already cloned the repo:
 
 ```
-git submodule init
-git submodule update
+git submodule update --recursive --remote
 ```
 
 If cloning the repo

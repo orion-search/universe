@@ -11,6 +11,9 @@ services:
       MODEL_FAISS: ${SEARCH_ENGINE_MODEL_FAISS}
       MODEL_SVD: ${SEARCH_ENGINE_MODEL_SVD}
       MODEL_TFIDF: ${SEARCH_ENGINE_MODEL_TFIDF}
+      aws_access_key_id: ${AWS_ACCESS_KEY}
+      aws_secret_access_key: ${AWS_ACCESS_SECRET}
+      region: ${REGION}
     restart: always
     expose:
       - "5000"

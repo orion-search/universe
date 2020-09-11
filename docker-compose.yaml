@@ -1,16 +1,16 @@
 # This is for running the Orion ecosystem locally
 version: "3"
 services:
-  postgres:
-    image: postgres:12.2-alpine
-    container_name: postgres
-    environment:
-      POSTGRES_PASSWORD: ${DB_PASS}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_DB: ${DB_NAME}
-    expose:
-      - "5432"
-    restart: always
+  # postgres:
+  #   image: postgres:12.2-alpine
+  #   container_name: postgres
+  #   environment:
+  #     POSTGRES_PASSWORD: ${DB_PASS}
+  #     POSTGRES_USER: ${DB_USER}
+  #     POSTGRES_DB: ${DB_NAME}
+  #   expose:
+  #     - "5432"
+  #   restart: always
   search:
     build:
       context: ./search-engine
@@ -19,56 +19,59 @@ services:
     labels:
       description: Flask endpoints for document search
     environment:
-      MODEL_FAISS: ${SEARCH_ENGINE_MODEL_FAISS}
-      MODEL_SVD: ${SEARCH_ENGINE_MODEL_SVD}
-      MODEL_TFIDF: ${SEARCH_ENGINE_MODEL_TFIDF}
+      s3_bucket: ${S3_BUCKET}
+      faiss_index: ${SEARCH_ENGINE_MODEL_FAISS}
+      es_endpoint: ${ES_ENDPOINT}
+      es_port: ${ES_PORT}
+      es_index: ${ES_INDEX}
       aws_access_key_id: ${AWS_ACCESS_KEY}
       aws_secret_access_key: ${AWS_ACCESS_SECRET}
       region: ${REGION}
+      model: ${SEARCH_ENGINE_MODEL_BERT}
     restart: always
     ports:
-      - "5000:${ORION_SEARCH_PORT}"
-  airflow:
-    container_name: airflow
-    depends_on:
-      - postgres
-    build:
-      context: ./orion
-      dockerfile: Dockerfile
-      args:
-        DB_HOST: ${DB_HOST}
-        DB_PORT: ${DB_PORT}
-        DB_NAME: ${DB_NAME}
-        DB_USER: ${DB_USER}
-        DB_PASS: ${DB_PASS}
-    environment:
-      AIRFLOW__CORE__DAGS_FOLDER: "/airflow/orion/core/dags"
-    env_file:
-      - .env
-    ports:
-      - "8081:8080"
-    restart: always
-  graphql:
-    image: hasura/graphql-engine:v1.0.0
-    container_name: graphql
-    labels:
-      description: Our GraphQL interface to our PostgreSQL database
-    environment:
-      HASURA_GRAPHQL_DATABASE_URL: postgres://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}
-      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_ADMIN_SECRET}
-      HASURA_GRAPHQL_ENABLE_CONSOLE: ${HASURA_GUI}
-      # HASURA_GRAPHQL_ACCESS_KEY: ${HASURA_SECRET_KEY}
-      # HASURA_GRAPHQL_JWT_SECRET: '{"type":"HS256", "key":"${JWT_SECRET_KEY}"}'
-    command:
-      - graphql-engine
-      - serve
-      - --enable-console
-      - --unauthorized-role=anonymous
-    restart: always
-    ports:
-      - "8080:${HASURA_PORT}"
-  # frontend:
-  #   container_name: frontend
+      - "5000:5000"
+  # airflow:
+  #   container_name: airflow
+  #   depends_on:
+  #     - postgres
+  #   build:
+  #     context: ./orion
+  #     dockerfile: Dockerfile
+  #     args:
+  #       DB_HOST: ${DB_HOST}
+  #       DB_PORT: ${DB_PORT}
+  #       DB_NAME: ${DB_NAME}
+  #       DB_USER: ${DB_USER}
+  #       DB_PASS: ${DB_PASS}
+  #   environment:
+  #     AIRFLOW__CORE__DAGS_FOLDER: "/airflow/orion/core/dags"
+  #   env_file:
+  #     - .env
+  #   ports:
+  #     - "8081:8080"
   #   restart: always
-  #   depends_on: graphql
-  #   environment: REACT_APP_HASURA_GRAPHQL_URL=localhost:${HASURA_HOST}/v1/
+  # graphql:
+  #   image: hasura/graphql-engine:v1.0.0
+  #   container_name: graphql
+  #   labels:
+  #     description: Our GraphQL interface to our PostgreSQL database
+  #   environment:
+  #     HASURA_GRAPHQL_DATABASE_URL: postgres://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}
+  #     HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_ADMIN_SECRET}
+  #     HASURA_GRAPHQL_ENABLE_CONSOLE: ${HASURA_GUI}
+  #     # HASURA_GRAPHQL_ACCESS_KEY: ${HASURA_SECRET_KEY}
+  #     # HASURA_GRAPHQL_JWT_SECRET: '{"type":"HS256", "key":"${JWT_SECRET_KEY}"}'
+  #   command:
+  #     - graphql-engine
+  #     - serve
+  #     - --enable-console
+  #     - --unauthorized-role=anonymous
+  #   restart: always
+  #   ports:
+  #     - "8080:${HASURA_PORT}"
+  # # frontend:
+  # #   container_name: frontend
+  # #   restart: always
+  # #   depends_on: graphql
+  # #   environment: REACT_APP_HASURA_GRAPHQL_URL=localhost:${HASURA_HOST}/v1/

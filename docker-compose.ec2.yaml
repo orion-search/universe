@@ -8,15 +8,19 @@ services:
     labels:
       description: Flask endpoints for document search
     environment:
-      MODEL_FAISS: ${SEARCH_ENGINE_MODEL_FAISS}
-      MODEL_SVD: ${SEARCH_ENGINE_MODEL_SVD}
-      MODEL_TFIDF: ${SEARCH_ENGINE_MODEL_TFIDF}
+      s3_bucket: ${S3_BUCKET}
+      faiss_index: ${SEARCH_ENGINE_MODEL_FAISS}
+      es_endpoint: ${ES_ENDPOINT}
+      es_port: ${ES_PORT}
+      es_index: ${ES_INDEX}
       aws_access_key_id: ${AWS_ACCESS_KEY}
       aws_secret_access_key: ${AWS_ACCESS_SECRET}
       region: ${REGION}
+      model: ${SEARCH_ENGINE_BERT}
+
     restart: always
-    expose:
-      - "5000"
+    ports:
+      - "5000:5000"
   graphql:
     image: hasura/graphql-engine:v1.0.0
     container_name: graphql

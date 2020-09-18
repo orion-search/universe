@@ -8,38 +8,61 @@ variable "AWS_REGION" {
   default = "eu-west-1"
 }
 
-variable "CIDR" {
-  type        = string
-  description = "(optional) describe your variable"
-  default     = "10.0.0.0/16"
-}
-
-variable "AZ" {
-  type        = list(string)
-  description = "Availability zones."
-  default     = ["a", "b", "c"]
-}
-
 variable "ENV" {
   type        = string
   description = "Work environment (prod or dev)."
   default     = "dev"
 }
 
-variable "PRIVATE_SUBNETS" {
+variable "cidr" {
+  description = "The CIDR block for the VPC. Default value is a valid CIDR, but not acceptable by AWS and should be overriden"
+  default     = "10.0.0.0/16"
+}
+
+variable "azs" {
+  description = "A list of availability zones in the region."
   type        = list(string)
-  description = ""
+  default     = ["a", "b", "c"]
+}
+
+variable "private_subnets" {
+  type        = list(string)
+  description = "A list of private subnets in a VPC."
   default     = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
 }
 
-variable "PUBLIC_SUBNETS" {
+variable "public_subnets" {
   type        = list(string)
-  description = ""
+  description = "A list of public subnets in a VPC."
   default     = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
 }
 
-variable "INSTANCE_TYPE" {
+variable "sg_name" {
+  type        = list(string)
+  description = "Security group names."
+  default     = ["ssh-sg", "psql-sg"]
+}
+
+variable "instance_type" {
   type        = string
-  description = "Type of the EC2 instance."
+  description = "EC2 instance type."
   default     = "t2.micro"
+}
+
+variable "instance_name" {
+  type        = string
+  description = "Name of EC2 instance."
+  default     = "my-instance"
+}
+
+variable "instance_count" {
+  type        = number
+  description = "Number of EC2 instances."
+  default     = 1
+}
+
+variable "db_username" {
+}
+
+variable "db_password" {
 }

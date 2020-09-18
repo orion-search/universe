@@ -14,17 +14,17 @@ variable "sg" {
 variable "database_subnets" {
 }
 
-# variable "db_name" {
-# }
+variable "backup_retention_period" {
+}
 
-# data "aws_subnet_ids" "all" {
-#   vpc_id = data.aws_vpc.default.id
-# }
+variable "db_name" {
+}
 
-# data "aws_security_group" "default" {
-#   vpc_id = data.aws_vpc.default.id
-#   name   = "default"
-# }
+variable "db_family" {
+}
+
+variable "major_engine_version" {
+}
 
 module "db" {
   source = "terraform-aws-modules/rds/aws"
@@ -37,7 +37,7 @@ module "db" {
   allocated_storage = 10
   storage_encrypted = false
 
-  name     = "demodb"
+  name     = var.db_name
   username = var.db_username
   password = var.db_password
   port     = "5432"
@@ -48,18 +48,17 @@ module "db" {
   # Subnets
   subnet_ids = var.database_subnets
 
-
   maintenance_window = "Mon:00:00-Mon:03:00"
   backup_window      = "03:00-06:00"
 
   # disable backups to create DB faster
-  backup_retention_period = 0
+  backup_retention_period = var.backup_retention_period
 
   # DB parameter group
-  family = "postgres11"
+  family = var.db_family
 
   # DB option group
-  major_engine_version = "11"
+  major_engine_version = var.major_engine_version
 
   # Database Deletion Protection
   deletion_protection = false

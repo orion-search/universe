@@ -14,6 +14,7 @@ variable "ENV" {
   default     = "dev"
 }
 
+# VPC, subnets and security groups variables
 variable "cidr" {
   description = "The CIDR block for the VPC. Default value is a valid CIDR, but not acceptable by AWS and should be overriden"
   default     = "10.0.0.0/16"
@@ -43,6 +44,7 @@ variable "sg_name" {
   default     = ["ssh-sg", "psql-sg"]
 }
 
+# EC2 instance variables
 variable "instance_type" {
   type        = string
   description = "EC2 instance type."
@@ -61,8 +63,29 @@ variable "instance_count" {
   default     = 1
 }
 
+# DB variables
 variable "db_username" {
 }
 
 variable "db_password" {
+}
+
+variable "backup_retention_period" {
+  type        = string
+  description = "Days keeping DB backups."
+  default     = 0
+}
+
+variable "db_name" {
+}
+
+variable "db_family" {
+  type    = string
+  default = "postgres11"
+}
+
+variable "major_engine_version" {
+  type        = string
+  description = "DB Version"
+  default     = "11"
 }

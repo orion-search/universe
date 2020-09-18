@@ -11,7 +11,7 @@ variable "instance_count" {
 }
 
 variable "path_to_public_key" {
-  default = "my_aws_key.pub"
+  default = "keys/my_aws_key.pub"
 }
 
 variable "public_subnets" {
@@ -21,6 +21,11 @@ variable "vpc_id" {
 }
 
 variable "sg_id" {
+}
+
+resource "aws_key_pair" "my_aws_key" {
+  key_name   = "my_aws_key"
+  public_key = file(var.path_to_public_key)
 }
 
 # Fetch the latest Amazon Linux 2 AMI
@@ -50,6 +55,10 @@ module "ec2" {
   # Security group ID
   vpc_security_group_ids      = [var.sg_id]
   associate_public_ip_address = true
+
+  # the public SSH key
+  key_name = aws_key_pair.my_aws_key.key_name
+
   tags = {
     "Terraform" = true
     "ENV"       = var.ENV

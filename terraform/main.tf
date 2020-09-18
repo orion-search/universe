@@ -1,3 +1,4 @@
+# Create a VPC
 module "vpc" {
   source          = "./modules/vpc"
   ENV             = var.ENV
@@ -8,6 +9,7 @@ module "vpc" {
   private_subnets = var.private_subnets
 }
 
+# Create security groups
 module "ssh_sg" {
   source  = "./modules/security_group/ssh"
   sg_name = var.sg_name
@@ -24,12 +26,16 @@ module "postgres_sg" {
 
 # Create a postgresql db
 module "db" {
-  source           = "./modules/rds"
-  ENV              = var.ENV
-  db_username      = var.db_username
-  db_password      = var.db_password
-  database_subnets = module.vpc.database_subnets
-  sg               = module.postgres_sg.sg_id
+  source                  = "./modules/rds"
+  ENV                     = var.ENV
+  db_username             = var.db_username
+  db_password             = var.db_password
+  database_subnets        = module.vpc.database_subnets
+  sg                      = module.postgres_sg.sg_id
+  backup_retention_period = var.backup_retention_period
+  db_family               = var.db_family
+  major_engine_version    = var.major_engine_version
+  db_name                 = var.db_name
 
 }
 

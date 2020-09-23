@@ -79,3 +79,22 @@ Caddy configures HTTPS automatically, and if you want to deploy to your own doma
 During the development process, and in order not to get rate limited, I'm copying over the `backend/certs/.caddy folder` to `$CADDYPATH`. See [here](https://github.com/abiosoft/caddy-docker#saving-certificates) for more details.
 
 In order to achieve [dev/prod parity](https://12factor.net/dev-prod-parity), the approach outlined [here](https://codewithhugo.com/docker-compose-local-https/) is also recommended, but is not currently implemented.
+
+## Provisioning AWS resources with terraform [WIP]
+- Download and install [terraform](https://www.terraform.io/downloads.html)
+- `cd` in `universe/terraform/`
+- Create a `terraform.tfvars` file containing the following variables:
+
+```
+AWS_ACCESS_KEY = "my_access_key"
+AWS_SECRET_KEY = "my_secret_key"
+
+db_name = "mu_db"
+db_username = "my_username"
+db_password = "my_password"
+```
+- To access the instantiated EC2 instance, you would need a to create keypair:
+    - `$ mkdir keys` 
+    - (On a MacOS) `$ ssh-keygen -f keys/my_aws_key` to create a keypair. Do not add this in version control.
+-  Run `$ terraform apply`
+- Type `yes` in the prompt to provision the listed infrastructure

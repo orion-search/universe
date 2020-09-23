@@ -63,6 +63,8 @@ module "db" {
   # Database Deletion Protection
   deletion_protection = false
 
+  publicly_accessible = true
+
   tags = {
     "Terraform" = true
     "Owner"     = "Orion"

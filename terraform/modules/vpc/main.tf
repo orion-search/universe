@@ -33,6 +33,9 @@ module "vpc" {
   create_database_subnet_route_table = true
   create_database_subnet_group       = true
 
+  # enable_ipv6 = true
+  # assign_ipv6_address_on_creation = true
+
   tags = {
     Terraform   = "true"
     Environment = var.ENV
